@@ -10,8 +10,10 @@ const Filters = ({ data }) => {
     const [cityDropdown, setCityDropdown] = useState([]);
     //flag for selected product status
     const [selectedProductFlag, setSelectedProductFlag] = useState();
+    const [selectedStateFlag, setSelectedStateFlag] = useState();
     //value of selected product
     const [selProductVal, setSelProductVal] = useState('');
+    const [selStateVal, setSelStateVal] = useState('');
 
     useEffect(() => {
         data && _onSelectedProducts();
@@ -22,6 +24,11 @@ const Filters = ({ data }) => {
     useEffect(() => {
         _onSelectedState();
     }, [selProductVal])
+
+    useEffect(() => {
+        _onSelectedCity();
+    }, [selProductVal, selStateVal])
+
 
     // Products dropdown onchange funtion
     const _onSelectedProducts = (e) => {
@@ -35,7 +42,7 @@ const Filters = ({ data }) => {
     }
 
     //State dropdown onchange function
-    const _onSelectedState = () => {
+    const _onSelectedState = (e) => {
         if (!selectedProductFlag) {
             const uniqueStates = [...new Set(data.map(item => item.address.state))];
             setStateDropdown(uniqueStates);
@@ -44,20 +51,53 @@ const Filters = ({ data }) => {
             const uniqueStates = [... new Set(filteredData.map(item => item.address.state))];
             setStateDropdown(uniqueStates);
         }
+        typeof e === 'undefined' ? setSelectedStateFlag(false) : setSelectedStateFlag(true);
+        if (e) {
+            setSelStateVal(e.value);
+        }
     }
 
     //City dropdown onchange function
     const _onSelectedCity = () => {
+        if (!selectedProductFlag && !selectedStateFlag) {
+            const uniqueCities = [... new Set(data.map(item => item.address.city))];
+            console.log(uniqueCities, "without condition");
+            setCityDropdown(uniqueCities);
+        }
+        if (selectedProductFlag && !selectedStateFlag) {
+            const filteredData = data.filter(prod => prod.product_name === selProductVal);
+            const uniqueCities = [... new Set(filteredData.map(item => item.address.city))];
+            console.log(uniqueCities, "with condition product exists");
+            setCityDropdown(uniqueCities);
+        }
+        if (!selectedProductFlag && selectedStateFlag) {
+            const filteredData = data.filter(prod => prod.address.state === selStateVal);
+            const uniqueCities = [... new Set(filteredData.map(item => item.address.city))];
+            console.log(uniqueCities, "with condition state exists");
+            setCityDropdown(uniqueCities);
+        }
+        if (selectedProductFlag && selectedStateFlag) {
+            const filteredData = data.filter(prod => prod.address.state === selStateVal && prod.product_name === selProductVal);
+            const uniqueCities = [... new Set(filteredData.map(item => item.address.city))];
+            console.log(uniqueCities, "with condition both exists");
+            setCityDropdown(uniqueCities);
+        }
+
     }
 
-    console.log(data);
     return (
         <div className={styles.container}>
             <div className={styles.heading}>Filters</div>
             <div className={styles.lineBreak}></div>
-            <Dropdown className={styles.input_products} options={productsDropdown} onChange={_onSelectedProducts} placeholder="Products" />;
-            <Dropdown className={styles.input_state} options={stateDropdown} onChange={_onSelectedState} placeholder="State" />;
-            <Dropdown className={styles.input_city} options={cityDropdown} onChange={_onSelectedCity} placeholder="City" />;
+            <div className={styles.input_products}>
+                <Dropdown options={productsDropdown} onChange={_onSelectedProducts} placeholder="Products" />;
+            </div>
+            <div className={styles.input_state}>
+                <Dropdown options={stateDropdown} onChange={_onSelectedState} placeholder="State" />;
+            </div>
+            <div className={styles.input_city}>
+                <Dropdown options={cityDropdown} onChange={_onSelectedCity} placeholder="City" />;
+            </div>
         </div>
     )
 }
