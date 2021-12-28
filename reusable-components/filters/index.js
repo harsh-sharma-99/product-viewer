@@ -4,33 +4,60 @@ import 'react-dropdown/style.css';
 import { useState, useEffect } from 'react';
 
 const Filters = ({ data }) => {
+    //dropdown values
     const [productsDropdown, setProductsDropdown] = useState([]);
-
-    const options = [
-        'one', 'two', 'three'
-    ];
-
-    const _onSelect = (e) => {
-
-    }
+    const [stateDropdown, setStateDropdown] = useState([]);
+    const [cityDropdown, setCityDropdown] = useState([]);
+    //flag for selected product status
+    const [selectedProductFlag, setSelectedProductFlag] = useState();
+    //value of selected product
+    const [selProductVal, setSelProductVal] = useState('');
 
     useEffect(() => {
-        _onSelectProducts();
-    }, [])
+        data && _onSelectedProducts();
+        data && _onSelectedState();
+        data && _onSelectedCity();
+    }, [data]);
 
-    const _onSelectProducts = (e) => {
-        let dropDown = [];
+    useEffect(() => {
+        _onSelectedState();
+    }, [selProductVal])
+
+    // Products dropdown onchange funtion
+    const _onSelectedProducts = (e) => {
+
         const uniqueProducts = [...new Set(data.map(item => item.product_name))];
-        setProductsDropdown(uniqueProducts);
+        uniqueProducts && setProductsDropdown(uniqueProducts);
+        typeof e === 'undefined' ? setSelectedProductFlag(false) : setSelectedProductFlag(true);
+        if (e) {
+            setSelProductVal(e.value);
+        }
     }
-    console.log(data, "filters")
+
+    //State dropdown onchange function
+    const _onSelectedState = () => {
+        if (!selectedProductFlag) {
+            const uniqueStates = [...new Set(data.map(item => item.address.state))];
+            setStateDropdown(uniqueStates);
+        } else {
+            const filteredData = data.filter(prod => prod.product_name === selProductVal);
+            const uniqueStates = [... new Set(filteredData.map(item => item.address.state))];
+            setStateDropdown(uniqueStates);
+        }
+    }
+
+    //City dropdown onchange function
+    const _onSelectedCity = () => {
+    }
+
+    console.log(data);
     return (
         <div className={styles.container}>
             <div className={styles.heading}>Filters</div>
             <div className={styles.lineBreak}></div>
-            <Dropdown className={styles.input_products} options={productsDropdown} onChange={_onSelectProducts} value='' placeholder="Products" />;
-            <Dropdown className={styles.input_state} options={options} onChange={_onSelect} value='' placeholder="State" />;
-            <Dropdown className={styles.input_city} options={options} onChange={_onSelect} value='' placeholder="City" />;
+            <Dropdown className={styles.input_products} options={productsDropdown} onChange={_onSelectedProducts} placeholder="Products" />;
+            <Dropdown className={styles.input_state} options={stateDropdown} onChange={_onSelectedState} placeholder="State" />;
+            <Dropdown className={styles.input_city} options={cityDropdown} onChange={_onSelectedCity} placeholder="City" />;
         </div>
     )
 }
