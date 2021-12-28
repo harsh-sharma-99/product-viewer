@@ -61,25 +61,21 @@ const Filters = ({ data }) => {
     const _onSelectedCity = () => {
         if (!selectedProductFlag && !selectedStateFlag) {
             const uniqueCities = [... new Set(data.map(item => item.address.city))];
-            console.log(uniqueCities, "without condition");
             setCityDropdown(uniqueCities);
         }
         if (selectedProductFlag && !selectedStateFlag) {
             const filteredData = data.filter(prod => prod.product_name === selProductVal);
             const uniqueCities = [... new Set(filteredData.map(item => item.address.city))];
-            console.log(uniqueCities, "with condition product exists");
             setCityDropdown(uniqueCities);
         }
         if (!selectedProductFlag && selectedStateFlag) {
             const filteredData = data.filter(prod => prod.address.state === selStateVal);
             const uniqueCities = [... new Set(filteredData.map(item => item.address.city))];
-            console.log(uniqueCities, "with condition state exists");
             setCityDropdown(uniqueCities);
         }
         if (selectedProductFlag && selectedStateFlag) {
             const filteredData = data.filter(prod => prod.address.state === selStateVal && prod.product_name === selProductVal);
             const uniqueCities = [... new Set(filteredData.map(item => item.address.city))];
-            console.log(uniqueCities, "with condition both exists");
             setCityDropdown(uniqueCities);
         }
 

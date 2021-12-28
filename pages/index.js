@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import LeftBlock from '../components/leftBlock'
-import RightBlock from '../components/rightBlock'
+import Content from '../components/content';
 
 const Home = () => {
 
@@ -21,10 +20,7 @@ const Home = () => {
 
 
   return (
-    <>
-      <LeftBlock data={data} />
-      <RightBlock data={data} />
-    </>
+    <Content data={data} />
   )
 }
 
