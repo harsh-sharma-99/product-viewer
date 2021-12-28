@@ -1,7 +1,6 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import styles from '../styles/Home.module.css'
+import LeftBlock from '../components/leftBlock'
+import RightBlock from '../components/rightBlock'
 
 const Home = () => {
 
@@ -19,11 +18,12 @@ const Home = () => {
     })
   }
 
+
+
   return (
     <>
-      <div className={styles.heading}>Edvora</div>
-      <hr className={styles.solid_top} />
-      <hr className={styles.solid_bottom} />
+      <LeftBlock data={data} />
+      <RightBlock data={data} />
     </>
   )
 }

@@ -1,0 +1,36 @@
+.container{
+    position: relative;
+width: 984px;
+height: 190px;
+left: 289px;
+top: 204px;
+
+background: #131313;
+border-radius: 15px;
+}
+
+
+.solid_top{
+  position: absolute;
+width: 970px;
+height: 0px;
+left: 303px;
+top: 192px;
+border: 1px solid rgba(203, 203, 203, 0.5);
+}
+
+.product_name{
+    position: absolute;
+width: 160px;
+height: 31px;
+left: 305px;
+top: 157px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+
+color: #FFFFFF;
+}

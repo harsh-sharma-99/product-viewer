@@ -1,0 +1,13 @@
+.box{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 210px;
+    height: 150px;
+    left: 309px;
+    top: 225px;
+    z-index: 1;
+    background: #232323;
+    border-radius: 4.68775px;
+}

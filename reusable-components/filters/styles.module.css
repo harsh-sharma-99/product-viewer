@@ -1,0 +1,68 @@
+.container{
+    position: absolute;
+width: 228px;
+height: 275px;
+left: 41px;
+top: 43px;
+
+background: #131313;
+border-radius: 15px;
+}
+
+.heading{
+position: absolute;
+left: 18%;
+right: 91.22%;
+top: 8.72%;
+bottom: 88.15%;
+font-family: SF Pro Display;
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+line-height: 24px;
+color: #A5A5A5;
+}
+
+.lineBreak{
+position: absolute;
+width: 158px;
+height: 0px;
+left: 40px;
+top: 60px;
+
+border: 1px solid #CBCBCB;
+}
+
+.input_products{
+position: absolute;
+width: 168.45px;
+height: 37.5px;
+left: 30px;
+top: 96px;
+background: #232323;
+border-radius: 4.68775px;
+
+}
+
+.input_state{
+position: absolute;
+width: 168.45px;
+height: 37.5px;
+left: 30px;
+top: 153px;
+background: #232323;
+border-radius: 4.68775px;
+
+}
+
+.input_city{
+position: absolute;
+width: 168.45px;
+height: 37.5px;
+left: 30px;
+top: 208px;
+
+background: #232323;
+border-radius: 4.68775px;
+
+}
