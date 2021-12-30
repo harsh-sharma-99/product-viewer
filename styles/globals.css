@@ -5,6 +5,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  overflow-x: hidden;
 }
 
 a {
@@ -14,4 +15,34 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.Dropdown-root.dropdown-override > .Dropdown-control {
+  background-color: #232323 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 5px !important;
+}
+.Dropdown-root.dropdown-override > .Dropdown-menu {
+  background-color: #232323 !important;
+  color: white !important;
+}
+
+.Dropdown-root.dropdown-override
+  > .Dropdown-menu
+  > .Dropdown-option.is-selected {
+  color: #333 !important;
+}
+
+.Dropdown-root.dropdown-override > .Dropdown-menu > .Dropdown-option {
+  color: white !important;
+}
+.Dropdown-root.dropdown-override > .Dropdown-menu > .Dropdown-option:hover {
+  color: #333 !important;
+}
+
+.Dropdown-root.dropdown-override > .Dropdown-control > .Dropdown-placeholder {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

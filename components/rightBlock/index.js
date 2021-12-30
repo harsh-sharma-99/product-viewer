@@ -8,10 +8,12 @@ const RightBlock = ({ data }) => {
       ...new Set(data?.map((data) => data.product_name)),
     ];
 
-    return uniqueCompanies.map((name) => {
+    return uniqueCompanies.map((name, key) => {
       const companyInfo = data?.filter((info) => info.product_name === name);
       return (
-        companyInfo && <Card companyInfo={companyInfo} companyName={name} />
+        companyInfo && (
+          <Card key={key} companyInfo={companyInfo} companyName={name} />
+        )
       );
     });
   };

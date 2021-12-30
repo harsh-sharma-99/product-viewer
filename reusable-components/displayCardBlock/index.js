@@ -7,7 +7,7 @@ const DisplayCardBlock = ({ product }) => {
   return (
     <div className={styles.box}>
       <div className={styles.image_container}>
-        <img className={styles.image_core} src={image} />
+        <img className={styles.image_core} src={image} alt={"Brand Image"} />
         <div className={styles.image_container_details}>
           <div className={styles.product_name}>{product_name}</div>
           <div className={styles.brand_name}>{brand_name}</div>
